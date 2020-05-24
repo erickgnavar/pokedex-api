@@ -7,7 +7,8 @@ defmodule Pokedex.MixProject do
       version: "0.1.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      aliases: aliases()
     ]
   end
 
@@ -23,7 +24,18 @@ defmodule Pokedex.MixProject do
   defp deps do
     [
       {:mojito, "~> 0.6.4"},
-      {:floki, "~> 0.26.0"}
+      {:floki, "~> 0.26.0"},
+      {:ecto, "~> 3.4"},
+      {:ecto_sql, "~> 3.4"},
+      {:postgrex, ">= 0.0.0"}
+    ]
+  end
+
+  defp aliases do
+    [
+      "ecto.setup": ["ecto.create", "ecto.migrate"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end
 end

@@ -9,6 +9,7 @@ defmodule Pokedex.Application do
     children = [
       # Starts a worker by calling: Pokedex.Worker.start_link(arg)
       # {Pokedex.Worker, arg}
+      Pokedex.Repo
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

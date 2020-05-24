@@ -8,7 +8,7 @@ defmodule Pokedex.Spider do
   @headers [
     "number",
     "name",
-    "type",
+    "types",
     "total",
     "hp",
     "attack",
@@ -45,7 +45,7 @@ defmodule Pokedex.Spider do
       |> Floki.children()
       |> Enum.map(&extract_data_from_row/1)
       |> Enum.map(&(Enum.zip(@headers, &1) |> Map.new()))
-      |> Enum.map(&fix_type/1)
+      |> Enum.map(&fix_types/1)
       |> Enum.map(&put_image_url/1)
 
     {:ok, items}
@@ -57,15 +57,15 @@ defmodule Pokedex.Spider do
     |> Enum.map(&Floki.text/1)
   end
 
-  defp fix_type(data) do
-    type =
+  defp fix_types(data) do
+    types =
       data
-      |> Map.get("type")
+      |> Map.get("types")
       |> String.trim()
       |> String.split("\n")
       |> Enum.reject(&(&1 == ""))
 
-    Map.put(data, "type", type)
+    Map.put(data, "types", types)
   end
 
   @spec put_image_url(map) :: String.t()
