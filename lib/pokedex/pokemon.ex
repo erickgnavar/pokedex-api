@@ -18,6 +18,7 @@ defmodule Pokedex.Pokemon do
     :types
   ]
 
+  @derive {Jason.Encoder, only: @fields}
   schema "pokemons" do
     field(:attack, :integer)
     field(:defense, :integer)

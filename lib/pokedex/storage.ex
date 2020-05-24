@@ -7,6 +7,10 @@ defmodule Pokedex.Storage do
   alias Pokedex.Repo
   import Ecto.Query
 
+  def list_all do
+    Repo.all(Pokemon)
+  end
+
   @spec lookup(String.t()) :: [Pokemon.t()]
   def lookup(term) do
     q = "%#{term}%"
