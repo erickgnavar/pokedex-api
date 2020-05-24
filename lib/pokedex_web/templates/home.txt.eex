@@ -1,0 +1,11 @@
+Pokedex api using data from https://pokemondb.net
+
+Endpoints:
+
+List all the pokemons:
+
+/pokemons
+
+Query by pokemon name:
+
+/pokemons?q=pikachu
