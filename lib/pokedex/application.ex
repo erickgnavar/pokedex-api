@@ -10,8 +10,10 @@ defmodule Pokedex.Application do
       # Starts a worker by calling: Pokedex.Worker.start_link(arg)
       # {Pokedex.Worker, arg}
       Pokedex.Repo,
-      # TODO: make port configurable
-      {Plug.Cowboy, scheme: :http, plug: PokedexWeb.Router, options: [port: 4000]}
+      {Plug.Cowboy,
+       scheme: :http,
+       plug: PokedexWeb.Router,
+       options: [port: String.to_integer(System.get_env("PORT", "4000"))]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
