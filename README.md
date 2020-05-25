@@ -1,21 +1,25 @@
 # Pokedex
 
-**TODO: Add description**
+Pokedex api using data from https://pokemondb.net
 
-## Installation
+## Deploy to heroku
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `pokedex` to your list of dependencies in `mix.exs`:
+Setup container based stack:
 
-```elixir
-def deps do
-  [
-    {:pokedex, "~> 0.1.0"}
-  ]
-end
-```
+`heroku stack:set container`
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/pokedex](https://hexdocs.pm/pokedex).
+Setup postgres addon:
 
+`heroku addons:create heroku-postgresql:hobby-dev`
+
+Setup required environment variables:
+
+`heroku config:set POOL_SIZE=10`
+
+Once deployment is done run migrations:
+
+`heroku run "POOL_SIZE=2 /rel/pokedex/bin/pokedex eval Pokedex.Release.migrate"`
+
+and fetch and insert data:
+
+`heroku run "POOL_SIZE=2 /rel/pokedex/bin/pokedex eval Pokedex.Release.fill_data"`
